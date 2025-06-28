@@ -1,20 +1,136 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Website Blocker</title>
-  <script src="script.js"></script>
-  <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-  <h1>Website Blocker</h1>
-  <h2>Add a site to block:</h2>
-  <div class="addSiteForm">
-    <input type="text" id="siteInput" placeholder="youtube.com">
-    <button id="addSite">Add Site</button>
-  </div>
-  <h2>Blocked Websites</h2>
-  <ul id="blockedList">
-    <li>No websites have been added yet...</li>
-  </ul>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FocusGuard</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="logo">
+          <div class="logo-icon">🛡️</div>
+          <h1>FocusGuard</h1>
+        </div>
+        <div class="stats"><span id="blockedCount">0</span> sites blocked</div>
+      </header>
+
+      <div class="quick-actions">
+        <button id="pauseButton" class="action-btn pause-btn">
+          <span class="btn-icon">⏸️</span>
+          <span class="btn-text">Pause Protection</span>
+        </button>
+        <button id="focusMode" class="action-btn focus-btn">
+          <span class="btn-icon">🎯</span>
+          <span class="btn-text">Focus Mode</span>
+        </button>
+      </div>
+
+      <div class="section">
+        <h2>Add Website to Block</h2>
+        <div class="add-site-form">
+          <div class="input-group">
+            <input
+              type="text"
+              id="siteInput"
+              placeholder="Enter website (e.g., youtube.com)"
+            />
+            <button id="addSite" class="add-btn">
+              <span class="btn-icon">➕</span>
+              Add
+            </button>
+          </div>
+          <div class="suggestions">
+            <span class="suggestion-label">Common distractions:</span>
+            <div class="suggestion-tags">
+              <button class="suggestion-tag" data-site="youtube.com">
+                YouTube
+              </button>
+              <button class="suggestion-tag" data-site="facebook.com">
+                Facebook
+              </button>
+              <button class="suggestion-tag" data-site="twitter.com">
+                Twitter
+              </button>
+              <button class="suggestion-tag" data-site="instagram.com">
+                Instagram
+              </button>
+              <button class="suggestion-tag" data-site="tiktok.com">
+                TikTok
+              </button>
+              <button class="suggestion-tag" data-site="reddit.com">
+                Reddit
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-header">
+          <h2>Blocked Websites</h2>
+          <div class="section-actions">
+            <button id="clearAll" class="clear-btn">Clear All</button>
+            <button id="exportList" class="export-btn">Export</button>
+          </div>
+        </div>
+        <div class="search-box">
+          <input
+            type="text"
+            id="searchInput"
+            placeholder="Search blocked sites..."
+          />
+        </div>
+        <ul id="blockedList" class="blocked-list">
+          <li class="empty-state">
+            <div class="empty-icon">🌟</div>
+            <p>No websites blocked yet</p>
+            <small>Add sites above to start focusing!</small>
+          </li>
+        </ul>
+      </div>
+
+      <div class="section">
+        <h2>Settings</h2>
+        <div class="settings-grid">
+          <div class="setting-item">
+            <label class="setting-label">
+              <input type="checkbox" id="strictMode" />
+              <span class="checkmark"></span>
+              Strict Mode
+            </label>
+            <small>Block subdomain variations</small>
+          </div>
+          <div class="setting-item">
+            <label class="setting-label">
+              <input type="checkbox" id="showNotifications" />
+              <span class="checkmark"></span>
+              Block Notifications
+            </label>
+            <small>Show when sites are blocked</small>
+          </div>
+          <div class="setting-item">
+            <label class="setting-label">
+              Redirect to:
+              <select id="redirectSelect">
+                <option value="notion.so">Notion</option>
+                <option value="google.com">Google</option>
+                <option value="blank">Blank Page</option>
+                <option value="custom">Custom URL</option>
+              </select>
+            </label>
+            <input
+              type="url"
+              id="customRedirect"
+              placeholder="Enter custom URL"
+              style="display: none"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="scripts/script.js"></script>
+  </body>
 </html>

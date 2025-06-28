@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to FocusGuard</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #333;
+      }
+
+      .welcome-container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        width: 90%;
+        overflow: hidden;
+        animation: slideIn 0.6s ease-out;
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .header {
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        padding: 60px 40px;
+        text-align: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .header::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>')
+          repeat;
+        animation: float 20s linear infinite;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translate(-50%, -50%) rotate(0deg);
+        }
+        100% {
+          transform: translate(-50%, -50%) rotate(360deg);
+        }
+      }
+
+      .header-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .logo {
+        width: 80px;
+        height: 80px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 40px;
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+      }
+
+      h1 {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        background: linear-gradient(45deg, #fff, #f0f0f0);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      .subtitle {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        font-weight: 300;
+      }
+
+      .content {
+        padding: 50px 40px;
+      }
+
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .feature {
+        text-align: center;
+        padding: 30px 20px;
+        border-radius: 15px;
+        background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .feature:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+      }
+
+      .feature-icon {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        border-radius: 15px;
+        margin: 0 auto 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 24px;
+        color: white;
+      }
+
+      .feature h3 {
+        color: #1e293b;
+        margin-bottom: 15px;
+        font-size: 1.3rem;
+        font-weight: 600;
+      }
+
+      .feature p {
+        color: #64748b;
+        line-height: 1.6;
+      }
+
+      .getting-started {
+        background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+        border-radius: 15px;
+        padding: 40px;
+        margin-bottom: 40px;
+        border-left: 5px solid #6366f1;
+      }
+
+      .getting-started h2 {
+        color: #1e293b;
+        margin-bottom: 20px;
+        font-size: 1.8rem;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .steps {
+        display: grid;
+        gap: 20px;
+      }
+
+      .step {
+        display: flex;
+        align-items: flex-start;
+        gap: 15px;
+      }
+
+      .step-number {
+        width: 30px;
+        height: 30px;
+        background: #6366f1;
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      .step-content {
+        flex: 1;
+      }
+
+      .step h4 {
+        color: #1e293b;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      .step p {
+        color: #64748b;
+        line-height: 1.6;
+      }
+
+      .actions {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .btn {
+        padding: 15px 30px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        font-size: 1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: white;
+        box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+      }
+
+      .btn-secondary {
+        background: white;
+        color: #6366f1;
+        border: 2px solid #6366f1;
+      }
+
+      .btn-secondary:hover {
+        background: #6366f1;
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .footer {
+        text-align: center;
+        padding: 30px;
+        color: #64748b;
+        background: #f8fafc;
+        border-top: 1px solid #e2e8f0;
+      }
+
+      @media (max-width: 768px) {
+        .welcome-container {
+          width: 95%;
+          margin: 20px;
+        }
+
+        .header {
+          padding: 40px 20px;
+        }
+
+        h1 {
+          font-size: 2rem;
+        }
+
+        .content {
+          padding: 30px 20px;
+        }
+
+        .getting-started {
+          padding: 25px;
+        }
+
+        .actions {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .btn {
+          width: 100%;
+          justify-content: center;
+          max-width: 300px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="welcome-container">
+      <div class="header">
+        <div class="header-content">
+          <div class="logo">🛡️</div>
+          <h1>FocusGuard</h1>
+          <p class="subtitle">Your digital productivity companion</p>
+        </div>
+      </div>
+
+      <div class="content">
+        <div class="features">
+          <div class="feature">
+            <div class="feature-icon">🚫</div>
+            <h3>Website Blocking</h3>
+            <p>
+              Block distracting websites with one click. Build a custom list of
+              sites that hurt your productivity.
+            </p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">⏯️</div>
+            <h3>Smart Controls</h3>
+            <p>
+              Pause protection when needed, or enable strict mode for
+              unbreakable focus sessions.
+            </p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">📊</div>
+            <h3>Progress Tracking</h3>
+            <p>
+              Monitor your browsing habits and see how much time you've saved by
+              staying focused.
+            </p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">🎯</div>
+            <h3>Focus Mode</h3>
+            <p>
+              Create focus sessions with approved websites only. Perfect for
+              work or study time.
+            </p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">⚡</div>
+            <h3>Quick Actions</h3>
+            <p>
+              Use keyboard shortcuts and right-click menus for lightning-fast
+              website blocking.
+            </p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">🔔</div>
+            <h3>Smart Notifications</h3>
+            <p>
+              Get notified when sites are blocked and receive gentle reminders
+              to stay on track.
+            </p>
+          </div>
+        </div>
+
+        <div class="getting-started">
+          <h2>🚀 Getting Started</h2>
+          <div class="steps">
+            <div class="step">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h4>Click the FocusGuard icon</h4>
+                <p>
+                  Look for the shield icon in your browser's toolbar to open the
+                  control panel.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h4>Add websites to block</h4>
+                <p>
+                  Type in distracting websites or right-click any page and
+                  select "Block this website".
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h4>Customize your experience</h4>
+                <p>
+                  Set up focus mode, enable notifications, and configure
+                  redirect options to match your workflow.
+                </p>
+              </div>
+            </div>
+
+            <div class="step">
+              <div class="step-number">4</div>
+              <div class="step-content">
+                <h4>Stay focused and productive</h4>
+                <p>
+                  Let FocusGuard handle the distractions while you focus on what
+                  matters most.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button class="btn btn-primary" id="openSettings">
+            ⚙️ Open Settings
+          </button>
+          <button class="btn btn-secondary" id="startBlocking">
+            🚫 Start Blocking Sites
+          </button>
+        </div>
+      </div>
+
+      <div class="footer">
+        <p>
+          Thank you for installing FocusGuard! Take control of your digital
+          habits and boost your productivity.
+        </p>
+      </div>
+    </div>
+    <script src="scripts/welcome.js"></script>
+  </body>
+</html>
