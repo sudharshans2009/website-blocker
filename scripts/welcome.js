@@ -2,6 +2,9 @@
 
 // Handle button clicks
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize theme
+    initializeTheme();
+    
     // Setup button event listeners
     const openSettingsBtn = document.getElementById('openSettings');
     const startBlockingBtn = document.getElementById('startBlocking');
@@ -23,6 +26,32 @@ document.addEventListener('DOMContentLoaded', function() {
     animateFeatures();
     animateSteps();
 });
+
+function initializeTheme() {
+    // Get saved theme or default to auto
+    chrome.storage.sync.get("theme", function(data) {
+        const theme = data.theme || "auto";
+        applyTheme(theme);
+    });
+}
+
+function applyTheme(theme) {
+    const body = document.body;
+    const html = document.documentElement;
+    
+    // Remove existing theme attributes
+    body.removeAttribute("data-theme");
+    html.removeAttribute("data-theme");
+    
+    if (theme === "light") {
+        body.setAttribute("data-theme", "light");
+        html.setAttribute("data-theme", "light");
+    } else if (theme === "dark") {
+        body.setAttribute("data-theme", "dark");
+        html.setAttribute("data-theme", "dark");
+    }
+    // Auto mode uses CSS prefers-color-scheme
+}
 
 function animateFeatures() {
     const features = document.querySelectorAll('.feature');

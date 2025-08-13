@@ -114,6 +114,33 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Site Blocked - FocusGuard</title>
         <style>
+          :root {
+            --background: 0 0% 100%;
+            --foreground: 222.2 84% 4.9%;
+            --card: 0 0% 100%;
+            --card-foreground: 222.2 84% 4.9%;
+            --primary: 221.2 83.2% 53.3%;
+            --primary-foreground: 210 40% 98%;
+            --muted: 210 40% 96%;
+            --muted-foreground: 215.4 16.3% 46.9%;
+            --border: 214.3 31.8% 91.4%;
+            --radius: 0.5rem;
+          }
+          
+          @media (prefers-color-scheme: dark) {
+            :root {
+              --background: 222.2 84% 4.9%;
+              --foreground: 210 40% 98%;
+              --card: 222.2 84% 4.9%;
+              --card-foreground: 210 40% 98%;
+              --primary: 217.2 91.2% 59.8%;
+              --primary-foreground: 222.2 84% 4.9%;
+              --muted: 217.2 32.6% 17.5%;
+              --muted-foreground: 215 20.2% 65.1%;
+              --border: 217.2 32.6% 17.5%;
+            }
+          }
+          
           * {
             margin: 0;
             padding: 0;
@@ -121,84 +148,118 @@
           }
           
           body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: hsl(var(--background));
+            color: hsl(var(--foreground));
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            line-height: 1.6;
           }
           
           .container {
             text-align: center;
             max-width: 500px;
-            padding: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            padding: 48px 32px;
+            background-color: hsl(var(--card));
+            border: 1px solid hsl(var(--border));
+            border-radius: calc(var(--radius) * 2);
+            box-shadow: 0 10px 40px hsl(var(--foreground) / 0.1);
+            margin: 20px;
           }
           
           .icon {
             font-size: 64px;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             animation: pulse 2s infinite;
           }
           
           h1 {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 700;
             margin-bottom: 16px;
             letter-spacing: -0.025em;
+            color: hsl(var(--foreground));
           }
           
           p {
             font-size: 16px;
-            opacity: 0.9;
+            color: hsl(var(--muted-foreground));
             line-height: 1.6;
             margin-bottom: 24px;
           }
           
           .site-name {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 8px 16px;
-            border-radius: 12px;
+            background-color: hsl(var(--muted));
+            color: hsl(var(--foreground));
+            padding: 12px 20px;
+            border-radius: var(--radius);
             display: inline-block;
             margin: 16px 0;
             font-weight: 600;
+            font-family: ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, monospace;
+            font-size: 14px;
+            border: 1px solid hsl(var(--border));
           }
           
           .redirect-info {
             font-size: 14px;
-            opacity: 0.8;
+            color: hsl(var(--muted-foreground));
+            margin-top: 24px;
+            margin-bottom: 16px;
+          }
+          
+          .progress-container {
+            width: 100%;
             margin-top: 20px;
           }
           
           .progress-bar {
             width: 100%;
-            height: 4px;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 2px;
+            height: 6px;
+            background-color: hsl(var(--muted));
+            border-radius: 3px;
             overflow: hidden;
             margin-top: 16px;
           }
           
           .progress-fill {
             height: 100%;
-            background: white;
-            border-radius: 2px;
+            background: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--primary)) 50%, hsl(var(--primary) / 0.8));
+            border-radius: 3px;
             animation: progress 2s linear;
           }
           
           @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            0%, 100% { 
+              transform: scale(1); 
+              opacity: 1;
+            }
+            50% { 
+              transform: scale(1.05); 
+              opacity: 0.8;
+            }
           }
           
           @keyframes progress {
             from { width: 0%; }
             to { width: 100%; }
+          }
+          
+          @media (max-width: 600px) {
+            .container {
+              margin: 16px;
+              padding: 32px 24px;
+            }
+            
+            h1 {
+              font-size: 24px;
+            }
+            
+            .icon {
+              font-size: 48px;
+            }
           }
         </style>
       </head>
@@ -206,11 +267,13 @@
         <div class="container">
           <div class="icon">🛡️</div>
           <h1>Site Blocked</h1>
-          <p>This website has been blocked by FocusGuard to help you stay focused.</p>
+          <p>This website has been blocked by FocusGuard to help you stay focused and productive.</p>
           <div class="site-name">${window.location.hostname}</div>
           <div class="redirect-info">Redirecting you to a more productive space...</div>
-          <div class="progress-bar">
-            <div class="progress-fill"></div>
+          <div class="progress-container">
+            <div class="progress-bar">
+              <div class="progress-fill"></div>
+            </div>
           </div>
         </div>
       </body>

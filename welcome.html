@@ -5,288 +5,275 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Welcome to FocusGuard</title>
     <style>
+      /* Modern Welcome Page Styles - ShadCn UI Inspired */
+      
+      /* CSS Custom Properties for Theming */
       :root {
-        /* Consistent with popup styles */
-        --primary: #2563eb;
-        --primary-hover: #1d4ed8;
-        --primary-light: #dbeafe;
-        --gray-50: #f9fafb;
-        --gray-100: #f3f4f6;
-        --gray-200: #e5e7eb;
-        --gray-500: #6b7280;
-        --gray-600: #4b5563;
-        --gray-700: #374151;
-        --gray-800: #1f2937;
+        /* Light Mode Colors */
+        --background: 0 0% 100%;
+        --foreground: 222.2 84% 4.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 222.2 84% 4.9%;
+        --primary: 221.2 83.2% 53.3%;
+        --primary-foreground: 210 40% 98%;
+        --secondary: 210 40% 96%;
+        --secondary-foreground: 222.2 84% 4.9%;
+        --muted: 210 40% 96%;
+        --muted-foreground: 215.4 16.3% 46.9%;
+        --accent: 210 40% 96%;
+        --accent-foreground: 222.2 84% 4.9%;
+        --border: 214.3 31.8% 91.4%;
+        --ring: 221.2 83.2% 53.3%;
         --radius: 0.5rem;
-        --radius-lg: 0.75rem;
-        --radius-xl: 1rem;
-        --space-4: 1rem;
-        --space-6: 1.5rem;
-        --space-8: 2rem;
-        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      }
+
+      /* Dark Mode Colors */
+      [data-theme="dark"] {
+        --background: 222.2 84% 4.9%;
+        --foreground: 210 40% 98%;
+        --card: 222.2 84% 4.9%;
+        --card-foreground: 210 40% 98%;
+        --primary: 217.2 91.2% 59.8%;
+        --primary-foreground: 222.2 84% 4.9%;
+        --secondary: 217.2 32.6% 17.5%;
+        --secondary-foreground: 210 40% 98%;
+        --muted: 217.2 32.6% 17.5%;
+        --muted-foreground: 215 20.2% 65.1%;
+        --accent: 217.2 32.6% 17.5%;
+        --accent-foreground: 210 40% 98%;
+        --border: 217.2 32.6% 17.5%;
+        --ring: 224.3 76.3% 94.1%;
+      }
+
+      /* Dark Mode Colors */
+      @media (prefers-color-scheme: dark) {
+        :root:not([data-theme="light"]) {
+          --background: 222.2 84% 4.9%;
+          --foreground: 210 40% 98%;
+          --card: 222.2 84% 4.9%;
+          --card-foreground: 210 40% 98%;
+          --primary: 217.2 91.2% 59.8%;
+          --primary-foreground: 222.2 84% 4.9%;
+          --secondary: 217.2 32.6% 17.5%;
+          --secondary-foreground: 210 40% 98%;
+          --muted: 217.2 32.6% 17.5%;
+          --muted-foreground: 215 20.2% 65.1%;
+          --accent: 217.2 32.6% 17.5%;
+          --accent-foreground: 210 40% 98%;
+          --border: 217.2 32.6% 17.5%;
+          --ring: 224.3 76.3% 94.1%;
+        }
       }
 
       * {
+        box-sizing: border-box;
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
       }
 
       body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+        font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background-color: hsl(var(--background));
+        color: hsl(var(--foreground));
+        line-height: 1.6;
         min-height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        color: var(--gray-700);
-        padding: var(--space-4);
       }
 
       .welcome-container {
-        background: white;
-        border-radius: var(--radius-xl);
-        box-shadow: var(--shadow-xl);
-        max-width: 900px;
-        width: 100%;
-        overflow: hidden;
-        animation: slideIn 0.5s ease-out;
-      }
-
-      @keyframes slideIn {
-        from {
-          opacity: 0;
-          transform: translateY(20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 40px 20px;
       }
 
       .header {
-        background: white;
-        padding: var(--space-8);
         text-align: center;
-        border-bottom: 1px solid var(--gray-100);
+        margin-bottom: 60px;
       }
 
       .logo {
-        width: 80px;
-        height: 80px;
-        background: var(--primary-light);
-        border-radius: var(--radius-xl);
-        margin: 0 auto var(--space-6);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2.5rem;
+        font-size: 64px;
+        margin-bottom: 20px;
+        animation: pulse 2s infinite;
       }
 
-      h1 {
-        font-size: 2.5rem;
+      .header h1 {
+        font-size: 42px;
         font-weight: 700;
-        margin-bottom: var(--space-4);
-        color: var(--gray-800);
-        letter-spacing: -0.025em;
+        margin-bottom: 12px;
+        background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent-foreground)));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
       }
 
       .subtitle {
-        font-size: 1.125rem;
-        color: var(--gray-600);
-        font-weight: 400;
+        font-size: 18px;
+        color: hsl(var(--muted-foreground));
+        font-weight: 500;
       }
 
       .content {
-        padding: var(--space-8);
+        margin-bottom: 60px;
       }
 
       .features {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: var(--space-6);
-        margin-bottom: var(--space-8);
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+        margin-bottom: 60px;
       }
 
       .feature {
-        text-align: center;
-        padding: var(--space-6);
-        border-radius: var(--radius-lg);
-        background: var(--gray-50);
-        transition: all 0.2s ease;
-        border: 1px solid var(--gray-100);
+        background-color: hsl(var(--card));
+        border: 1px solid hsl(var(--border));
+        border-radius: var(--radius);
+        padding: 24px;
+        transition: all 0.3s ease;
+        opacity: 0;
+        transform: translateY(20px);
       }
 
       .feature:hover {
+        box-shadow: 0 4px 12px hsl(var(--foreground) / 0.1);
         transform: translateY(-2px);
-        box-shadow: var(--shadow-lg);
-        border-color: var(--gray-200);
       }
 
       .feature-icon {
-        width: 60px;
-        height: 60px;
-        background: var(--primary);
-        border-radius: var(--radius-lg);
-        margin: 0 auto var(--space-4);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
-        color: white;
+        font-size: 32px;
+        margin-bottom: 16px;
       }
 
       .feature h3 {
-        color: var(--gray-800);
-        margin-bottom: var(--space-4);
-        font-size: 1.125rem;
+        font-size: 18px;
         font-weight: 600;
+        margin-bottom: 8px;
+        color: hsl(var(--foreground));
       }
 
       .feature p {
-        color: var(--gray-600);
-        line-height: 1.6;
-        font-size: 0.875rem;
+        color: hsl(var(--muted-foreground));
+        font-size: 14px;
       }
 
       .getting-started {
-        background: var(--gray-50);
-        border-radius: var(--radius-lg);
-        padding: var(--space-8);
-        margin-bottom: var(--space-8);
-        border: 1px solid var(--gray-100);
+        background-color: hsl(var(--card));
+        border: 1px solid hsl(var(--border));
+        border-radius: var(--radius);
+        padding: 32px;
+        margin-bottom: 40px;
       }
 
       .getting-started h2 {
-        color: var(--gray-800);
-        margin-bottom: var(--space-6);
-        font-size: 1.5rem;
+        font-size: 24px;
         font-weight: 600;
-        display: flex;
-        align-items: center;
-        gap: var(--space-4);
+        margin-bottom: 24px;
+        color: hsl(var(--foreground));
       }
 
       .steps {
-        display: grid;
-        gap: var(--space-6);
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
       }
 
       .step {
         display: flex;
-        align-items: flex-start;
-        gap: var(--space-4);
+        gap: 16px;
+        opacity: 0;
+        transform: translateX(-20px);
       }
 
       .step-number {
         width: 32px;
         height: 32px;
-        background: var(--primary);
-        color: white;
+        background-color: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
         font-weight: 600;
+        font-size: 14px;
         flex-shrink: 0;
-        font-size: 0.875rem;
       }
 
-      .step-content {
-        flex: 1;
-        padding-top: 2px;
-      }
-
-      .step h4 {
-        color: var(--gray-800);
-        margin-bottom: var(--space-4);
+      .step-content h4 {
+        font-size: 16px;
         font-weight: 600;
-        font-size: 1rem;
+        margin-bottom: 4px;
+        color: hsl(var(--foreground));
       }
 
-      .step p {
-        color: var(--gray-600);
-        line-height: 1.6;
-        font-size: 0.875rem;
+      .step-content p {
+        color: hsl(var(--muted-foreground));
+        font-size: 14px;
       }
 
       .actions {
         display: flex;
-        gap: var(--space-4);
+        gap: 16px;
         justify-content: center;
         flex-wrap: wrap;
       }
 
       .btn {
-        padding: 0.75rem 1.5rem;
-        border-radius: var(--radius);
-        text-decoration: none;
-        font-weight: 600;
-        transition: all 0.2s ease;
-        border: none;
-        cursor: pointer;
-        font-size: 0.875rem;
         display: inline-flex;
         align-items: center;
-        gap: 0.5rem;
+        gap: 8px;
+        padding: 12px 24px;
+        border-radius: var(--radius);
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        border: 1px solid transparent;
       }
 
       .btn-primary {
-        background: var(--primary);
-        color: white;
-        box-shadow: 0 4px 6px -1px rgba(37, 99, 235, 0.3);
+        background-color: hsl(var(--primary));
+        color: hsl(var(--primary-foreground));
+        border-color: hsl(var(--primary));
       }
 
       .btn-primary:hover {
-        background: var(--primary-hover);
-        transform: translateY(-1px);
-        box-shadow: 0 6px 12px -1px rgba(37, 99, 235, 0.4);
+        background-color: hsl(var(--primary) / 0.9);
       }
 
       .btn-secondary {
-        background: white;
-        color: var(--primary);
-        border: 1px solid var(--primary);
+        background-color: hsl(var(--secondary));
+        color: hsl(var(--secondary-foreground));
+        border-color: hsl(var(--border));
       }
 
       .btn-secondary:hover {
-        background: var(--primary);
-        color: white;
-        transform: translateY(-1px);
+        background-color: hsl(var(--accent));
       }
 
       .footer {
         text-align: center;
-        padding: var(--space-6);
-        color: var(--gray-600);
-        background: var(--gray-50);
-        border-top: 1px solid var(--gray-100);
-        font-size: 0.875rem;
+        padding-top: 40px;
+        border-top: 1px solid hsl(var(--border));
+        color: hsl(var(--muted-foreground));
+        font-size: 14px;
+      }
+
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
       }
 
       @media (max-width: 768px) {
-        body {
-          padding: var(--space-4);
-        }
-
         .welcome-container {
-          width: 100%;
+          padding: 20px 16px;
         }
 
-        .header,
-        .content,
-        .getting-started {
-          padding: var(--space-6);
-        }
-
-        h1 {
-          font-size: 2rem;
+        .header h1 {
+          font-size: 32px;
         }
 
         .features {
           grid-template-columns: 1fr;
-          gap: var(--space-4);
         }
 
         .actions {
@@ -296,8 +283,8 @@
 
         .btn {
           width: 100%;
+          max-width: 300px;
           justify-content: center;
-          max-width: 280px;
         }
       }
     </style>

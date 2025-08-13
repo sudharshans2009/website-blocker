@@ -15,6 +15,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const showNotificationsCheckbox = document.getElementById("showNotifications");
   const redirectSelect = document.getElementById("redirectSelect");
   const customRedirectInput = document.getElementById("customRedirect");
+  const themeToggle = document.getElementById("themeToggle");
+  const themeIcon = document.getElementById("themeIcon");
 
   // State management
   let currentSearchTerm = "";
@@ -25,6 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
   init();
 
   function init() {
+    initializeTheme();
     loadSettings();
     updateBlockedList();
     updateStats();
@@ -33,6 +36,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function setupEventListeners() {
+    // Theme toggle
+    themeToggle.addEventListener("click", toggleTheme);
+    
     // Add site functionality
     addSiteButton.addEventListener("click", addSite);
     siteInput.addEventListener("keypress", function(e) {
@@ -437,5 +443,58 @@ document.addEventListener("DOMContentLoaded", function () {
       info: "#3b82f6"
     };
     return colors[type] || colors.info;
+  }
+
+  // Theme Management Functions
+  function initializeTheme() {
+    chrome.storage.sync.get("theme", function(data) {
+      const theme = data.theme || "auto";
+      applyTheme(theme);
+    });
+  }
+
+  function toggleTheme() {
+    chrome.storage.sync.get("theme", function(data) {
+      const currentTheme = data.theme || "auto";
+      let newTheme;
+      
+      // Cycle through: auto -> light -> dark -> auto
+      if (currentTheme === "auto") {
+        newTheme = "light";
+      } else if (currentTheme === "light") {
+        newTheme = "dark";
+      } else {
+        newTheme = "auto";
+      }
+      
+      chrome.storage.sync.set({ theme: newTheme }, function() {
+        applyTheme(newTheme);
+      });
+    });
+  }
+
+  function applyTheme(theme) {
+    const body = document.body;
+    const html = document.documentElement;
+    
+    // Remove existing theme attributes
+    body.removeAttribute("data-theme");
+    html.removeAttribute("data-theme");
+    
+    if (theme === "light") {
+      body.setAttribute("data-theme", "light");
+      html.setAttribute("data-theme", "light");
+      themeIcon.textContent = "☀️";
+      themeToggle.title = "Switch to dark mode";
+    } else if (theme === "dark") {
+      body.setAttribute("data-theme", "dark");
+      html.setAttribute("data-theme", "dark");
+      themeIcon.textContent = "🌙";
+      themeToggle.title = "Switch to auto mode";
+    } else {
+      // Auto mode - let CSS prefers-color-scheme handle it
+      themeIcon.textContent = "🌓";
+      themeToggle.title = "Switch to light mode";
+    }
   }
 });
